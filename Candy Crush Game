@@ -1,0 +1,128 @@
+# Candy Crush Game 
+elements = ['🔥','🚀','❤️','🤩']
+boardList = []
+# Randomly populate 25 items in the board list 
+import random 
+ --> '🚀'
+def generateNewBoard():
+    boardList  = []
+    for item in range(25):
+        boardList.append(random.choice(elements))
+    return boardList
+    
+    boardList = generateNewBoard()
+    
+    def printBoard(lst):
+        print("Our candy crush game")
+        pos = 0
+        for i in range(5):
+            for j in range(5):
+                print(lst[pos],end =  ' ')
+                pos = pos +1
+                print(" ")
+                
+    boardList = generateNewBoard()
+    printBoard(boardList)
+  -->  Our Candy Crush Board
+    🚀 ❤️ 🤩 🔥 🤩 
+    ❤️ 🤩 ❤️ 🚀 🚀 
+    🤩 🚀 🤩 🔥 🔥 
+    ❤️ 🤩 🤩 🔥 🤩 
+    🤩 ❤️ 🔥 🤩 🔥 
+    
+    def takeInput()
+    Enter the position of item you want to move - 0
+    Enter the new position - 1
+    ['0','1']
+    
+    def boardRef():
+        print("Our candy crush reference")
+        pos = 0
+        for i in range(5):
+            for j in range(5):
+                print(pos,end = ' ')
+                pos = pos +1
+            print("")
+            
+    boardRef()
+ -->   Our Candy Crush Board Reference
+    0 1 2 3 4 
+    5 6 7 8 9 
+   10 11 12 13 14 
+   15 16 17 18 19 
+   20 21 22 23 24 
+    # make a function to get all possible combination to check for matching
+    #check for valid combinations for candy crush and then only send it
+    #else dont send it
+    def getCombinations(num):
+        #horizontal combination
+      -->  c1 = [num-2,num-1,num]
+           c2 = [num,num+1,num+2]
+           c3 = [num-1,num,num+1]
+        #check for horizontal valid combinations
+        horizontal_Rows = [[0,1,2,3,4], [5,6,7,8,9], [10,11,12,13,14], [15,16,17,18,19], [20,21,22,23,24]]
+  horizontal_comb = [c1,c2,c3]
+
+  valid_horizonatoal_comb = []
+
+  for hc in horizontal_comb:
+    for hr in horizontal_Rows:
+      if (all(item in hr for item in hc)):
+        valid_horizonatoal_comb.append(hc)
+
+  #print(valid_horizonatoal_comb)
+
+
+
+  # vertical combinations 
+  c4 = [num-10,num-5,num]
+  c5 = [num,num+5,num+10]
+  c6 = [num-5, num, num+5]
+
+  vertical_comb = [c4,c5,c6]
+  valid_vc = []
+
+  for vc in vertical_comb:
+    flag = 0 
+    for position in vc:
+      if position<0 or position>24:
+        flag = 1
+    if flag == 0:
+      valid_vc.append(vc)
+
+  #print(valid_vc)
+
+  lst = valid_horizonatoal_comb
+  lst.extend(valid_vc)
+  return lst
+  
+ getCombinations(0)
+--> [[0, 1, 2]]
+    [[0, 5, 10]]
+    [[0, 1, 2], [0, 5, 10]]
+
+# make a function to check if there is a match 
+printBoard(boardList)
+--> Our Candy Crush Board
+   🚀 ❤️ 🤩 🔥 🤩 
+   ❤️ 🤩 ❤️ 🚀 🚀 
+   🤩 🚀 🤩 🔥 🔥 
+   ❤️ 🤩 🤩 🔥 🤩 
+   🤩 ❤️ 🔥 🤩 🔥
+def checkMatch(curentPos, FuturePos, boardLst):
+  ele = boardLst[curentPos]
+  combos = getCombinations(FuturePos)
+
+  flag = 0 
+  for combo in combos:
+    if (boardLst[combo[0]]== ele and boardLst[combo[1]]== ele) or (boardLst[combo[1]]== ele and boardLst[combo[2]]== ele) or (boardLst[combo[0]]== ele and boardLst[combo[2]]== ele):
+      flag =1
+  if flag == 1:
+    print('WOW match ho gaya bhaiyoo 🥲')
+  else:
+    print("Nai ho raha hai fir se karoo 🤬")
+    
+    checkMatch(18,23,boardList)
+   ->  WOW match ho gaya bhaiyoo 🥲  
+     checkMatch(0,1,boardList)
+   ->  Nai ho raha hai fir se karoo 🤬
